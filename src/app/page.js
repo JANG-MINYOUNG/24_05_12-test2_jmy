@@ -155,6 +155,12 @@ const NewTodoForm = ({ noticeSnackbarStatus }) => {
 };
 
 const TodoListItem = ({ todo, index, openDrawer }) => {
+  const [checked, setChecked] = React.useState(false);
+
+  const handleCheckboxClick = () => {
+    setChecked(!checked);
+  };
+
   return (
     <>
       <li key={todo.id}>
@@ -169,16 +175,15 @@ const TodoListItem = ({ todo, index, openDrawer }) => {
             />
           </div>
           <div className="tw-rounded-[10px] tw-shadow tw-flex tw-text-[14px] tw-min-h-[80px]">
-            <Button className="tw-flex-shrink-0 tw-rounded-[10px_0_0_10px]" color="inherit">
-              <FaCheck
-                className={classNames(
-                  'tw-text-3xl',
-                  {
-                    'tw-text-[--mui-color-primary-main]': index % 2 == 0,
-                  },
-                  { 'tw-text-[#dcdcdc]': index % 2 != 0 },
-                )}
-              />
+            <Button
+              className="tw-flex-shrink-0 tw-rounded-[10px_0_0_10px] tw-text-[3xl]"
+              color="inherit"
+              onClick={handleCheckboxClick}>
+              {checked ? (
+                <FaCheck className="tw-text-[--mui-color-primary-main]" />
+              ) : (
+                <FaCheck className="tw-text-[#dcdcdc]" />
+              )}
             </Button>
             <div className="tw-bg-[#dcdcdc] tw-w-[2px] tw-h-[60px] tw-self-center"></div>
             <div className="tw-bg-blue-300 tw-flex tw-items-center tw-p-3 tw-flex-grow hover:tw-text-[--mui-color-primary-main] tw-whitespace-pre-wrap tw-leading-relaxed tw-break-words">
